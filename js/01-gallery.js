@@ -29,8 +29,16 @@ gallery.addEventListener('click', (event) => {
   //finding big image url
   event.preventDefault();
 
+  if (event.target.classList.value !== 'gallery__image') {
+    return;
+  }
+
+  let findGalleryItemByPreview = galleryItems.find(
+    (el) => el.preview === event.target.src
+  );
+
   const instance = basicLightbox.create(`
-  <img src='${event.target.dataset.source}' width="800" height="600">`);
+  <img src='${event.target.dataset.source}' alt='${findGalleryItemByPreview.description}' width="800" height="600">`);
   instance.show();
 
   //modal close from key Escape
